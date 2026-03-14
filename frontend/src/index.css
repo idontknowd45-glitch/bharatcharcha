@@ -1,0 +1,527 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.625rem;
+        --background: 0.99 0 0;
+        --foreground: 0.15 0 0;
+        --card: 1 0 0;
+        --card-foreground: 0.15 0 0;
+        --popover: 1 0 0;
+        --popover-foreground: 0.15 0 0;
+        --primary: 0.55 0.22 264;
+        --primary-foreground: 0.99 0 0;
+        --secondary: 0.96 0.01 264;
+        --secondary-foreground: 0.15 0 0;
+        --muted: 0.96 0.01 264;
+        --muted-foreground: 0.50 0.01 264;
+        --accent: 0.70 0.18 330;
+        --accent-foreground: 0.99 0 0;
+        --destructive: 0.58 0.24 27;
+        --destructive-foreground: 0.99 0 0;
+        --border: 0.92 0.01 264;
+        --input: 0.92 0.01 264;
+        --ring: 0.55 0.22 264;
+        --chart-1: 0.65 0.22 41;
+        --chart-2: 0.60 0.12 185;
+        --chart-3: 0.40 0.07 227;
+        --chart-4: 0.83 0.19 84;
+        --chart-5: 0.77 0.19 70;
+        --sidebar: 0.99 0 0;
+        --sidebar-foreground: 0.15 0 0;
+        --sidebar-primary: 0.55 0.22 264;
+        --sidebar-primary-foreground: 0.99 0 0;
+        --sidebar-accent: 0.96 0.01 264;
+        --sidebar-accent-foreground: 0.15 0 0;
+        --sidebar-border: 0.92 0.01 264;
+        --sidebar-ring: 0.55 0.22 264;
+    }
+
+    .dark {
+        --background: 0.12 0.01 264;
+        --foreground: 0.98 0.01 264;
+        --card: 0.16 0.01 264;
+        --card-foreground: 0.98 0.01 264;
+        --popover: 0.16 0.01 264;
+        --popover-foreground: 0.98 0.01 264;
+        --primary: 0.70 0.22 264;
+        --primary-foreground: 0.12 0.01 264;
+        --secondary: 0.22 0.02 264;
+        --secondary-foreground: 0.98 0.01 264;
+        --muted: 0.22 0.02 264;
+        --muted-foreground: 0.65 0.02 264;
+        --accent: 0.75 0.20 330;
+        --accent-foreground: 0.98 0.01 264;
+        --destructive: 0.62 0.24 27;
+        --destructive-foreground: 0.98 0.01 264;
+        --border: 0.25 0.02 264;
+        --input: 0.25 0.02 264;
+        --ring: 0.70 0.22 264;
+        --chart-1: 0.49 0.24 264;
+        --chart-2: 0.70 0.17 162;
+        --chart-3: 0.77 0.19 70;
+        --chart-4: 0.63 0.27 304;
+        --chart-5: 0.65 0.25 16;
+        --sidebar: 0.16 0.01 264;
+        --sidebar-foreground: 0.98 0.01 264;
+        --sidebar-primary: 0.70 0.22 264;
+        --sidebar-primary-foreground: 0.98 0.01 264;
+        --sidebar-accent: 0.22 0.02 264;
+        --sidebar-accent-foreground: 0.98 0.01 264;
+        --sidebar-border: 0.25 0.02 264;
+        --sidebar-ring: 0.70 0.22 264;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* GPU-accelerated animations with will-change hints */
+@layer utilities {
+    /* Smooth scroll behavior */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Header animations */
+    .header-animate {
+        will-change: transform;
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Post card animations */
+    .post-card-animate {
+        will-change: transform, opacity;
+        animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+    }
+
+    /* Post entry animation for timeline */
+    .post-entry-animate {
+        will-change: transform, opacity;
+        animation: fadeInSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInSlide {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    /* Like button bounce animation */
+    .like-bounce {
+        animation: likeBounce 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes likeBounce {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.3);
+        }
+    }
+
+    /* Button hover animations with GPU acceleration */
+    .button-hover-scale {
+        will-change: transform;
+        transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .button-hover-scale:hover:not(:disabled) {
+        transform: scale(1.05);
+    }
+
+    .button-hover-scale:active:not(:disabled) {
+        transform: scale(0.98);
+    }
+
+    /* Avatar hover effect */
+    .avatar-hover {
+        will-change: transform;
+        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .avatar-hover:hover {
+        transform: scale(1.1);
+    }
+
+    /* Navigation button hover */
+    .nav-button-hover {
+        will-change: background-color, transform;
+        transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .nav-button-hover:hover {
+        transform: translateY(-2px);
+    }
+
+    /* Theme toggle animation */
+    .theme-toggle-animate {
+        will-change: transform, opacity;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+    }
+
+    .theme-toggle-animate:hover {
+        transform: rotate(180deg);
+    }
+
+    /* Dialog/Modal animations */
+    .dialog-animate {
+        will-change: transform, opacity;
+        animation: dialogFadeIn 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes dialogFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.95) translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    /* Dropdown menu animation */
+    .dropdown-animate {
+        will-change: transform, opacity;
+        animation: dropdownSlideIn 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes dropdownSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Menu item hover */
+    .menu-item-hover {
+        will-change: background-color;
+        transition: background-color 0.15s ease;
+    }
+
+    /* Notification badge animation */
+    .notification-badge-animate {
+        will-change: transform;
+        animation: badgePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes badgePulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    /* Logo hover effect */
+    .logo-hover {
+        will-change: transform;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .logo-hover:hover {
+        transform: scale(1.05);
+    }
+
+    /* Logo pulse animation for welcome screen */
+    .logo-pulse {
+        will-change: transform;
+        animation: logoPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes logoPulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+    }
+
+    /* Composer card animation with expand/collapse */
+    .composer-card-animate {
+        will-change: transform, opacity, height;
+        animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .composer-expanded {
+        animation: composerExpand 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .composer-collapsed {
+        animation: composerCollapse 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes composerExpand {
+        from {
+            transform: scale(0.98);
+        }
+        to {
+            transform: scale(1);
+        }
+    }
+
+    @keyframes composerCollapse {
+        from {
+            transform: scale(1);
+        }
+        to {
+            transform: scale(0.98);
+        }
+    }
+
+    /* Sidebar card animation */
+    .sidebar-card-animate {
+        will-change: transform, opacity;
+        animation: fadeInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* Trending item hover */
+    .trending-item-hover {
+        will-change: transform, background-color;
+        transition: transform 0.15s ease, background-color 0.2s ease;
+    }
+
+    .trending-item-hover:hover {
+        transform: translateX(4px);
+    }
+
+    /* Input focus animation */
+    .input-focus-animate {
+        will-change: border-color, box-shadow;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Media image animation */
+    .media-image-animate {
+        will-change: transform;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .media-image-animate:hover {
+        transform: scale(1.02);
+    }
+
+    /* Media preview animation */
+    .media-preview-animate {
+        will-change: transform, opacity;
+        animation: fadeInScale 0.3s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+    }
+
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* Media grid animation */
+    .media-grid-animate {
+        will-change: opacity;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    /* Notification card animation */
+    .notification-card-animate {
+        will-change: transform, opacity;
+        animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Notification icon animation */
+    .notification-icon-animate {
+        will-change: transform;
+        animation: iconBounce 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes iconBounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-4px);
+        }
+    }
+
+    /* Welcome screen animation */
+    .welcome-screen-animate {
+        will-change: transform, opacity;
+        animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Empty state animation */
+    .empty-state-animate {
+        will-change: opacity;
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Page header animation */
+    .page-header-animate {
+        will-change: transform, opacity;
+        animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Timeline container - stagger children */
+    .timeline-container > * {
+        animation: fadeInSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+    }
+
+    .timeline-container > *:nth-child(1) { animation-delay: 0.05s; }
+    .timeline-container > *:nth-child(2) { animation-delay: 0.1s; }
+    .timeline-container > *:nth-child(3) { animation-delay: 0.15s; }
+    .timeline-container > *:nth-child(4) { animation-delay: 0.2s; }
+    .timeline-container > *:nth-child(5) { animation-delay: 0.25s; }
+    .timeline-container > *:nth-child(n+6) { animation-delay: 0.3s; }
+
+    /* Notifications container - stagger children */
+    .notifications-container > * {
+        animation: fadeInUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .notifications-container > *:nth-child(1) { animation-delay: 0.05s; }
+    .notifications-container > *:nth-child(2) { animation-delay: 0.1s; }
+    .notifications-container > *:nth-child(3) { animation-delay: 0.15s; }
+    .notifications-container > *:nth-child(4) { animation-delay: 0.2s; }
+    .notifications-container > *:nth-child(5) { animation-delay: 0.25s; }
+
+    /* Message bubble animation */
+    .message-bubble-animate {
+        will-change: transform, opacity;
+        animation: messageBubbleSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes messageBubbleSlide {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Friend list item hover */
+    .friend-item-hover {
+        will-change: background-color, transform;
+        transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .friend-item-hover:hover {
+        transform: translateX(4px);
+    }
+
+    /* Messages sidebar animation */
+    .messages-sidebar-animate {
+        will-change: transform, opacity;
+        animation: fadeInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @keyframes fadeInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    /* Messages chat area animation */
+    .messages-chat-animate {
+        will-change: transform, opacity;
+        animation: fadeInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Typing indicator animation */
+    .typing-indicator {
+        will-change: opacity;
+        animation: typingPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes typingPulse {
+        0%, 100% {
+            opacity: 0.4;
+        }
+        50% {
+            opacity: 1;
+        }
+    }
+
+    /* Reduce motion for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+
+    /* Performance optimization: contain layout shifts */
+    .post-card-animate,
+    .post-entry-animate,
+    .notification-card-animate,
+    .composer-card-animate,
+    .sidebar-card-animate,
+    .message-bubble-animate,
+    .messages-sidebar-animate,
+    .messages-chat-animate {
+        contain: layout style paint;
+    }
+}
